@@ -85,15 +85,13 @@ export function AppSidebar({ activePanel, setActivePanel }: AppSidebarProps) {
       <SidebarHeader className="p-4 border-b border-blue-800 bg-blue-900">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
-            <img 
-              src="/lovable-uploads/b67c2c3c-5ced-42d9-a219-0b77e432375a.png" 
-              alt="COGERH Logo" 
-              className="w-8 h-8 object-contain filter brightness-0 invert"
-            />
+            <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
+              <span className="text-blue-900 font-bold text-xs">BI</span>
+            </div>
           </div>
           {state === "expanded" && (
             <div className="text-white">
-              <div className="text-sm font-semibold">COGERH</div>
+              <div className="text-sm font-semibold">BI - COGERH</div>
               <div className="text-xs opacity-80">Companhia de Gestão dos Recursos Hídricos</div>
             </div>
           )}

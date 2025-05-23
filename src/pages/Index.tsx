@@ -27,6 +27,23 @@ const Index = () => {
     }
   };
 
+  const getPanelDescription = () => {
+    switch (activePanel) {
+      case 'dashboard':
+        return 'Dashboard - Indicadores';
+      case 'indicadores':
+        return 'Painel de Indicadores Financeiros';
+      case 'regularizacao':
+        return 'Painéis de controle e monitoramento de processos de regularização de usuários';
+      case 'analises':
+        return 'Análises avançadas com modelos estatísticos e probabilísticos de previsões';
+      case 'relatorios':
+        return 'Relatórios detalhados e exportação de dados em diversos formatos';
+      default:
+        return 'Dashboard - Indicadores';
+    }
+  };
+
   const renderContent = () => {
     switch (activePanel) {
       case 'dashboard':
@@ -61,12 +78,15 @@ const Index = () => {
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+      <div className="min-h-screen flex w-full bg-white">
         <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
-        <SidebarInset className="flex-1 ml-0">
+        <SidebarInset className="flex-1 w-full">
           <div className="flex flex-col h-screen">
             <PanelHeader title={getPanelTitle()} />
-            <main className="flex-1 p-6 overflow-auto bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+            <div className="px-6 py-4 bg-white border-b border-gray-200">
+              <h2 className="text-lg font-bold text-blue-900">{getPanelDescription()}</h2>
+            </div>
+            <main className="flex-1 p-6 overflow-auto bg-white ml-12">
               {renderContent()}
             </main>
           </div>
