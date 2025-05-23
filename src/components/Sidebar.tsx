@@ -1,12 +1,12 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   BarChart, 
   Settings, 
-  Menu,
   Folder,
-  LayoutList
+  LayoutList,
+  Filter
 } from 'lucide-react';
 import {
   Sidebar,
@@ -18,7 +18,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 
@@ -56,25 +55,45 @@ const menuItems = [
 ];
 
 export function AppSidebar({ activePanel, setActivePanel }: AppSidebarProps) {
-  const { state, toggleSidebar } = useSidebar();
+  const { state } = useSidebar();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const sidebarWidth = 256; // 16rem em pixels
+      
+      // Mostrar sidebar quando mouse estiver próximo da borda esquerda
+      if (e.clientX <= 50) {
+        setIsVisible(true);
+      }
+      // Ocultar sidebar quando mouse sair da área da sidebar + margem
+      else if (e.clientX > sidebarWidth + 50) {
+        setIsVisible(false);
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <Sidebar className="bg-blue-900 border-r-0">
-      <SidebarHeader className="p-4 border-b border-blue-800">
-        <div 
-          className="flex items-center gap-3 cursor-pointer"
-          onClick={toggleSidebar}
-        >
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+    <Sidebar 
+      className={`bg-blue-900 border-r-0 transition-transform duration-300 ease-in-out ${
+        isVisible ? 'translate-x-0' : '-translate-x-full'
+      } fixed z-50`}
+    >
+      <SidebarHeader className="p-4 border-b border-blue-800 bg-blue-900">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
             <img 
-              src="/lovable-uploads/ab3f39fd-be8b-4c1e-9c33-344e9ff91233.png" 
-              alt="COGEU Logo" 
-              className="w-8 h-8 object-contain"
+              src="/lovable-uploads/b67c2c3c-5ced-42d9-a219-0b77e432375a.png" 
+              alt="COGERH Logo" 
+              className="w-8 h-8 object-contain filter brightness-0 invert"
             />
           </div>
           {state === "expanded" && (
             <div className="text-white">
-              <div className="text-sm font-semibold">COGEU</div>
+              <div className="text-sm font-semibold">COGERH</div>
               <div className="text-xs opacity-80">Companhia de Gestão dos Recursos Hídricos</div>
             </div>
           )}

@@ -11,11 +11,6 @@ interface EmptyPanelProps {
 const EmptyPanel: React.FC<EmptyPanelProps> = ({ title, description }) => {
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white">{title}</h1>
-        <div className="text-white text-sm">Data de Atualização: 20/05/2025</div>
-      </div>
-
       <Card className="p-12 bg-white text-center">
         <Construction className="w-16 h-16 mx-auto mb-4 text-gray-400" />
         <h3 className="text-xl font-semibold mb-2">Painel em Desenvolvimento</h3>

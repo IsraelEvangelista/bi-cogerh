@@ -5,9 +5,27 @@ import { AppSidebar } from '@/components/Sidebar';
 import DashboardContent from '@/components/DashboardContent';
 import IndicadoresContent from '@/components/IndicadoresContent';
 import EmptyPanel from '@/components/EmptyPanel';
+import PanelHeader from '@/components/PanelHeader';
 
 const Index = () => {
   const [activePanel, setActivePanel] = useState('dashboard');
+
+  const getPanelTitle = () => {
+    switch (activePanel) {
+      case 'dashboard':
+        return 'Dashboard';
+      case 'indicadores':
+        return 'Indicadores';
+      case 'regularizacao':
+        return 'Regularização';
+      case 'analises':
+        return 'Análises';
+      case 'relatorios':
+        return 'Relatórios';
+      default:
+        return 'Dashboard';
+    }
+  };
 
   const renderContent = () => {
     switch (activePanel) {
@@ -45,10 +63,13 @@ const Index = () => {
     <SidebarProvider defaultOpen={true}>
       <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
         <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
-        <SidebarInset className="flex-1">
-          <main className="flex-1 p-6 overflow-auto">
-            {renderContent()}
-          </main>
+        <SidebarInset className="flex-1 ml-0">
+          <div className="flex flex-col h-screen">
+            <PanelHeader title={getPanelTitle()} />
+            <main className="flex-1 p-6 overflow-auto bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+              {renderContent()}
+            </main>
+          </div>
         </SidebarInset>
       </div>
     </SidebarProvider>
