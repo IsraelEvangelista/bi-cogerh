@@ -5,8 +5,10 @@ import DashboardContent from '@/components/DashboardContent';
 import IndicadoresContent from '@/components/IndicadoresContent';
 import EmptyPanel from '@/components/EmptyPanel';
 import PanelHeader from '@/components/PanelHeader';
+
 const Index = () => {
   const [activePanel, setActivePanel] = useState('dashboard');
+
   const getPanelTitle = () => {
     switch (activePanel) {
       case 'dashboard':
@@ -23,6 +25,7 @@ const Index = () => {
         return 'Dashboard';
     }
   };
+
   const getPanelDescription = () => {
     switch (activePanel) {
       case 'dashboard':
@@ -39,6 +42,7 @@ const Index = () => {
         return 'Dashboard - Indicadores';
     }
   };
+
   const renderContent = () => {
     switch (activePanel) {
       case 'dashboard':
@@ -55,19 +59,23 @@ const Index = () => {
         return <DashboardContent />;
     }
   };
-  return <SidebarProvider defaultOpen={true}>
+
+  return (
+    <SidebarProvider defaultOpen={true}>
       <div className="min-h-screen flex w-full bg-white">
         <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
         <SidebarInset className="flex-1 w-full">
           <div className="flex flex-col h-screen">
             <PanelHeader title={getPanelTitle()} />
             
-            <main className="flex-1 p-6 overflow-auto bg-white ml-12">
+            <main className="flex-1 p-6 overflow-auto bg-white">
               {renderContent()}
             </main>
           </div>
         </SidebarInset>
       </div>
-    </SidebarProvider>;
+    </SidebarProvider>
+  );
 };
+
 export default Index;
