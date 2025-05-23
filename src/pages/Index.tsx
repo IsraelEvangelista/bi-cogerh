@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from '@/components/Sidebar';
 import DashboardContent from '@/components/DashboardContent';
 import IndicadoresContent from '@/components/IndicadoresContent';
@@ -61,18 +62,18 @@ const Index = () => {
   };
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="min-h-screen flex w-full bg-white">
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen w-full bg-white relative">
         <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
-        <SidebarInset className="flex-1 w-full">
-          <div className="flex flex-col h-screen">
-            <PanelHeader title={getPanelTitle()} />
-            
-            <main className="flex-1 p-6 overflow-auto bg-white">
-              {renderContent()}
-            </main>
-          </div>
-        </SidebarInset>
+        
+        {/* Painel principal que ocupa toda a largura */}
+        <div className="w-full min-h-screen flex flex-col">
+          <PanelHeader title={getPanelTitle()} />
+          
+          <main className="flex-1 p-6 overflow-auto bg-white pl-8">
+            {renderContent()}
+          </main>
+        </div>
       </div>
     </SidebarProvider>
   );
