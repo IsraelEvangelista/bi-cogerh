@@ -1,58 +1,93 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Users, DollarSign } from 'lucide-react';
-import {
-  BarChart,
-  Bar,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from 'recharts';
-
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 const DashboardContent = () => {
   // Dados simulados baseados nas imagens
-  const monthlyData = [
-    { month: 'Jan', faturado: 21, consumo: 18 },
-    { month: 'Fev', faturado: 20, consumo: 19 },
-    { month: 'Mar', faturado: 18, consumo: 16 },
-    { month: 'Abr', faturado: 19, consumo: 17 },
-    { month: 'Mai', faturado: 7, consumo: 15 },
-    { month: 'Jun', faturado: 16, consumo: 14 },
-    { month: 'Jul', faturado: 18, consumo: 16 },
-    { month: 'Ago', faturado: 19, consumo: 17 },
-    { month: 'Set', faturado: 20, consumo: 18 },
-    { month: 'Out', faturado: 21, consumo: 19 },
-    { month: 'Nov', faturado: 22, consumo: 20 },
-    { month: 'Dez', faturado: 25, consumo: 22 },
-  ];
-
-  const topClients = [
-    { name: 'CAGECE ETA GAVIÃO', value: 24474830.73, growth: 5.89 },
-    { name: 'CAGECE ETA OESTE', value: 14164815.36, growth: 0.14 },
-    { name: 'ARCELORMITTAL PECÉM', value: 10466545.91, growth: 2.86 },
-  ];
-
-  const pieData = [
-    { name: 'Carcinicultura', value: 38.43, color: '#22c55e' },
-    { name: 'Piscicultura', value: 34.00, color: '#3b82f6' },
-    { name: 'Demais Usos', value: 23.47, color: '#f59e0b' },
-    { name: 'Outros', value: 4.10, color: '#ef4444' },
-  ];
-
-  return (
-    <div className="space-y-6">
+  const monthlyData = [{
+    month: 'Jan',
+    faturado: 21,
+    consumo: 18
+  }, {
+    month: 'Fev',
+    faturado: 20,
+    consumo: 19
+  }, {
+    month: 'Mar',
+    faturado: 18,
+    consumo: 16
+  }, {
+    month: 'Abr',
+    faturado: 19,
+    consumo: 17
+  }, {
+    month: 'Mai',
+    faturado: 7,
+    consumo: 15
+  }, {
+    month: 'Jun',
+    faturado: 16,
+    consumo: 14
+  }, {
+    month: 'Jul',
+    faturado: 18,
+    consumo: 16
+  }, {
+    month: 'Ago',
+    faturado: 19,
+    consumo: 17
+  }, {
+    month: 'Set',
+    faturado: 20,
+    consumo: 18
+  }, {
+    month: 'Out',
+    faturado: 21,
+    consumo: 19
+  }, {
+    month: 'Nov',
+    faturado: 22,
+    consumo: 20
+  }, {
+    month: 'Dez',
+    faturado: 25,
+    consumo: 22
+  }];
+  const topClients = [{
+    name: 'CAGECE ETA GAVIÃO',
+    value: 24474830.73,
+    growth: 5.89
+  }, {
+    name: 'CAGECE ETA OESTE',
+    value: 14164815.36,
+    growth: 0.14
+  }, {
+    name: 'ARCELORMITTAL PECÉM',
+    value: 10466545.91,
+    growth: 2.86
+  }];
+  const pieData = [{
+    name: 'Carcinicultura',
+    value: 38.43,
+    color: '#22c55e'
+  }, {
+    name: 'Piscicultura',
+    value: 34.00,
+    color: '#3b82f6'
+  }, {
+    name: 'Demais Usos',
+    value: 23.47,
+    color: '#f59e0b'
+  }, {
+    name: 'Outros',
+    value: 4.10,
+    color: '#ef4444'
+  }];
+  return <div className="space-y-6">
       {/* Header com data */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white">Dashboard - Indicadores</h1>
-        <div className="text-white text-sm">Data de Atualização: 20/05/2025</div>
+        
+        
       </div>
 
       {/* Cards principais */}
@@ -110,7 +145,7 @@ const DashboardContent = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value) => [`R$ ${value}Mi`, '']} />
+              <Tooltip formatter={value => [`R$ ${value}Mi`, '']} />
               <Bar dataKey="faturado" fill="#22c55e" />
             </BarChart>
           </ResponsiveContainer>
@@ -120,15 +155,13 @@ const DashboardContent = () => {
         <Card className="p-6 bg-white">
           <h3 className="text-lg font-semibold mb-4">Top 3 Maiores Faturamentos do Ano</h3>
           <div className="space-y-4">
-            {topClients.map((client, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+            {topClients.map((client, index) => <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded">
                 <div className="flex-1">
                   <p className="font-medium text-sm">{client.name}</p>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                    <div 
-                      className="bg-green-500 h-2 rounded-full" 
-                      style={{ width: `${Math.min(client.growth * 10, 100)}%` }}
-                    ></div>
+                    <div className="bg-green-500 h-2 rounded-full" style={{
+                  width: `${Math.min(client.growth * 10, 100)}%`
+                }}></div>
                   </div>
                 </div>
                 <div className="text-right ml-4">
@@ -137,8 +170,7 @@ const DashboardContent = () => {
                   </p>
                   <p className="text-sm text-gray-600">{client.growth}%</p>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </Card>
       </div>
@@ -149,32 +181,19 @@ const DashboardContent = () => {
           <h3 className="text-lg font-semibold mb-4">Crescimento por Categoria</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
-              <Pie
-                data={pieData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={120}
-                paddingAngle={5}
-                dataKey="value"
-              >
-                {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
+              <Pie data={pieData} cx="50%" cy="50%" innerRadius={60} outerRadius={120} paddingAngle={5} dataKey="value">
+                {pieData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
               </Pie>
-              <Tooltip formatter={(value) => `${value}%`} />
+              <Tooltip formatter={value => `${value}%`} />
             </PieChart>
           </ResponsiveContainer>
           <div className="flex flex-wrap gap-4 mt-4">
-            {pieData.map((entry, index) => (
-              <div key={index} className="flex items-center">
-                <div 
-                  className="w-3 h-3 rounded mr-2" 
-                  style={{ backgroundColor: entry.color }}
-                ></div>
+            {pieData.map((entry, index) => <div key={index} className="flex items-center">
+                <div className="w-3 h-3 rounded mr-2" style={{
+              backgroundColor: entry.color
+            }}></div>
                 <span className="text-sm">{entry.name}: {entry.value}%</span>
-              </div>
-            ))}
+              </div>)}
           </div>
         </Card>
 
@@ -202,8 +221,6 @@ const DashboardContent = () => {
           </div>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DashboardContent;
