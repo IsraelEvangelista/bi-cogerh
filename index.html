@@ -4,66 +4,131 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>finance-insights-dash</title>
+
+    <!--  ────────────  Metadados originais  ──────────── -->
     <meta name="description" content="Lovable Generated Project" />
     <meta name="author" content="Lovable" />
-
     <meta property="og:title" content="finance-insights-dash" />
     <meta property="og:description" content="Lovable Generated Project" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <!-- ======  ESTILOS  PROVISÓRIOS  ====== -->
+    <!--  ────────────  CSS de layout  ──────────── -->
     <style>
-      /* zera margens e paddings padrão */
+      :root {
+        --sidebar-width: 250px;         /* largura total quando expandida   */
+        --header-height: 56px;          /* ajuste conforme seu header real */
+      }
+
+      /* reset básico */
       html, body {
         margin: 0;
         padding: 0;
         height: 100%;
       }
 
-      /* ----- SIDEBAR ----- */
-      #sidebar {
-        position: fixed;
-        top: 0;
-        left: -250px;          /* fica fora da tela até o hover */
-        width: 250px;
-        height: 100vh;
-        background: #151b28;   /* ajuste à sua paleta */
-        transition: left 0.3s ease;
-        z-index: 1000;         /* sobrepõe o painel */
-        overflow-y: auto;
-      }
-      #sidebar:hover {
-        left: 0;               /* desliza para dentro */
+      /* impede rolagem na <body>; só #content rola */
+      body {
+        overflow: hidden;
+        font-family: system-ui, sans-serif;
       }
 
-      /* ----- PAINEL PRINCIPAL ----- */
-      #main {
-        position: relative;    /* ou static, se preferir */
-        margin-left: 0;        /* <<< SEM offset fixo */
-        padding: 1rem;         /* espaçamento interno opcional */
-        min-height: 100vh;
+      /* ───────── HEADER fixo ───────── */
+      #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--header-height);
+        background: #ffffff;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+      }
+
+      /* ───────── SIDEBAR fixo ───────── */
+      #sidebar {
+        position: fixed;
+        top: var(--header-height);
+        left: calc(-1 * var(--sidebar-width));     /* escondida fora da tela */
+        width: var(--sidebar-width);
+        height: calc(100vh - var(--header-height));
+        background: #151b28;
+        color: #fff;
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        z-index: 999;
+      }
+
+      /* mostra a sidebar ao passar o mouse perto dela
+         (30px de área sensível) */
+      #sidebar::before {
+        content: "";
+        position: absolute;
+        right: -30px;
+        top: 0;
+        width: 30px;
+        height: 100%;
+      }
+      #sidebar:hover,
+      #sidebar::before:hover {
+        left: 0;
+      }
+
+      /* ───────── CONTAINER principal ─────────
+         ocupa tudo abaixo do header, flex row   */
+      #layout {
+        display: flex;
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--header-height));
+      }
+
+      /* ───────── CONTEÚDO (visuais) ───────── */
+      #content {
+        flex: 1 1 auto;
+        overflow-y: auto;          /* única barra de rolagem */
+        padding: 1rem 2rem;
         box-sizing: border-box;
+        background: #f9fafb;       /* cor de fundo opcional  */
+      }
+
+      /* opcional: esconde segunda barra de rolagem do Chrome
+         quando #sidebar está aberta */
+      #sidebar:hover ~ #content {
+        scrollbar-gutter: stable;
       }
     </style>
   </head>
 
   <body>
-    <!-- SIDEBAR (exemplo: pode ser componente React depois) -->
-    <nav id="sidebar">
-      <!-- conteúdo da sua sidebar -->
-    </nav>
+    <!-- HEADER -->
+    <header id="header">
+      <span>Dashboard</span>
+      <!-- aqui entram filtros, data de atualização, etc. -->
+    </header>
 
-    <!-- PAINEL PRINCIPAL -->
-    <div id="main">
-      <div id="root"></div>
+    <!-- LAYOUT -->
+    <div id="layout">
+      <!-- SIDEBAR -->
+      <nav id="sidebar">
+        <!-- links, ícones, filtros… -->
+      </nav>
+
+      <!-- CONTEÚDO (React montará aqui dentro) -->
+      <main id="content">
+        <div id="root"></div>
+      </main>
     </div>
 
-    <!-- SCRIPTS -->
+    <!--  ────────────  SCRIPTS originais  ──────────── -->
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
