@@ -15,10 +15,55 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <!-- ======  ESTILOS  PROVISÓRIOS  ====== -->
+    <style>
+      /* zera margens e paddings padrão */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      /* ----- SIDEBAR ----- */
+      #sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;          /* fica fora da tela até o hover */
+        width: 250px;
+        height: 100vh;
+        background: #151b28;   /* ajuste à sua paleta */
+        transition: left 0.3s ease;
+        z-index: 1000;         /* sobrepõe o painel */
+        overflow-y: auto;
+      }
+      #sidebar:hover {
+        left: 0;               /* desliza para dentro */
+      }
+
+      /* ----- PAINEL PRINCIPAL ----- */
+      #main {
+        position: relative;    /* ou static, se preferir */
+        margin-left: 0;        /* <<< SEM offset fixo */
+        padding: 1rem;         /* espaçamento interno opcional */
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="root"></div>
+    <!-- SIDEBAR (exemplo: pode ser componente React depois) -->
+    <nav id="sidebar">
+      <!-- conteúdo da sua sidebar -->
+    </nav>
+
+    <!-- PAINEL PRINCIPAL -->
+    <div id="main">
+      <div id="root"></div>
+    </div>
+
+    <!-- SCRIPTS -->
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
