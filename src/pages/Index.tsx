@@ -1,13 +1,57 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { AppSidebar } from '@/components/Sidebar';
+import DashboardContent from '@/components/DashboardContent';
+import IndicadoresContent from '@/components/IndicadoresContent';
+import EmptyPanel from '@/components/EmptyPanel';
 
 const Index = () => {
+  const [activePanel, setActivePanel] = useState('dashboard');
+
+  const renderContent = () => {
+    switch (activePanel) {
+      case 'dashboard':
+        return <DashboardContent />;
+      case 'indicadores':
+        return <IndicadoresContent />;
+      case 'regularizacao':
+        return (
+          <EmptyPanel 
+            title="Regularização" 
+            description="Painéis de controle e monitoramento de processos de regularização de usuários."
+          />
+        );
+      case 'analises':
+        return (
+          <EmptyPanel 
+            title="Análises" 
+            description="Análises avançadas com modelos estatísticos e probabilísticos de previsões."
+          />
+        );
+      case 'relatorios':
+        return (
+          <EmptyPanel 
+            title="Relatórios" 
+            description="Relatórios detalhados e exportação de dados em diversos formatos."
+          />
+        );
+      default:
+        return <DashboardContent />;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <SidebarProvider defaultOpen={true}>
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+        <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
+        <SidebarInset className="flex-1">
+          <main className="flex-1 p-6 overflow-auto">
+            {renderContent()}
+          </main>
+        </SidebarInset>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
 
