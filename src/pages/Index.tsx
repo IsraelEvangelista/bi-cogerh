@@ -48,7 +48,7 @@ const Index = () => {
     <SidebarProvider defaultOpen={true}>
       <div className="min-h-screen flex w-full bg-white">
         <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
-        <div className="flex-1 w-full pl-64">
+        <div className="flex-1 w-full ml-64">
           <div className="flex flex-col h-screen">
             <PanelHeader title={getPanelTitle()} />
             
