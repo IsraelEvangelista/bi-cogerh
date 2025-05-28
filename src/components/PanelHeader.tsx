@@ -13,7 +13,7 @@ const PanelHeader: React.FC<PanelHeaderProps> = ({
       year: 'numeric'
     });
   };
-  return <div className="h-16 bg-white border-b border-gray-200 px-6 flex items-left justify-between shadow-sm">
+  return <div className="h-16 bg-white border-b border-gray-200 px-6 flex items-center justify-between shadow-sm">
       <h1 className="text-xl text-gray-800 font-bold">{title}</h1>
       
       <div className="flex items-center gap-4">
