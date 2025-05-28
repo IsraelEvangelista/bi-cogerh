@@ -46,10 +46,10 @@ const DashboardContent = () => {
       return (
         <div className="bg-white p-3 border rounded shadow-lg">
           <p className="font-semibold">{label}</p>
-          <p className="text-green-600">Atual: R$ {atual}Mi</p>
-          <p className="text-blue-600">Anterior: R$ {anterior}Mi</p>
+          <p className="text-blue-600">Ano Atual: R$ {atual}Mi</p>
+          <p className="text-gray-600">Ano Anterior: R$ {anterior}Mi</p>
           <p className={`${parseFloat(diferenca) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-            Diferença: {diferenca}%
+            Variação: {diferenca}%
           </p>
         </div>
       );
@@ -124,7 +124,7 @@ const DashboardContent = () => {
 
       {/* Gráficos */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Gráfico de barras mensal com comparação */}
+        {/* Gráfico de barras mensal com comparação melhorada */}
         <Card className="p-6 bg-white">
           <h3 className="text-lg font-semibold mb-4">
             Faturamento Mensal Comparativo (R$ Mi)
@@ -134,30 +134,52 @@ const DashboardContent = () => {
               </span>
             )}
           </h3>
+          <div className="mb-4 flex items-center gap-4 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-blue-400 rounded"></div>
+              <span>Ano Atual</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-gray-400 rounded"></div>
+              <span>Ano Anterior</span>
+            </div>
+          </div>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={monthlyData} onClick={handleBarClick} barCategoryGap="20%">
-              <CartesianGrid strokeDasharray="3 3" />
+            <BarChart data={monthlyData} onClick={handleBarClick} barCategoryGap="15%">
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis 
                 dataKey="month" 
                 tick={<CustomXAxisTick />}
                 height={60}
+                axisLine={false}
+                tickLine={false}
               />
-              <YAxis />
+              <YAxis 
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 12, fill: '#666' }}
+              />
               <Tooltip content={<CustomTooltip />} />
+              
+              {/* Barra do ano anterior (mais larga, atrás) */}
               <Bar 
                 dataKey="faturadoAnterior" 
-                fill="#93c5fd" 
+                fill="#9ca3af" 
                 name="Ano Anterior"
-                barSize={30}
-                radius={[2, 2, 0, 0]}
+                barSize={40}
+                radius={[3, 3, 0, 0]}
+                opacity={0.8}
               />
+              
+              {/* Barra do ano atual (mais estreita, na frente) */}
               <Bar 
                 dataKey="faturadoAtual" 
-                fill="#22c55e" 
+                fill="#3b82f6" 
                 name="Ano Atual"
-                barSize={15}
-                radius={[2, 2, 0, 0]}
+                barSize={28}
+                radius={[3, 3, 0, 0]}
               />
+              
               {/* Linhas de separação dos trimestres */}
               <ReferenceLine x="Mar" stroke="#e5e7eb" strokeDasharray="2 2" />
               <ReferenceLine x="Jun" stroke="#e5e7eb" strokeDasharray="2 2" />
