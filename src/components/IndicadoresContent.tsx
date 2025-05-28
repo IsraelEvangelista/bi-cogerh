@@ -2,65 +2,81 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { CheckCircle, AlertCircle, Target, TrendingUp, Building2, ArrowRight } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+
 const IndicadoresContent = () => {
   const [selectedGerencia, setSelectedGerencia] = useState<string | null>(null);
-  const gerenciasData = [{
-    id: 'geofi',
-    nome: 'Gerência de Outorga e Fiscalização',
-    sigla: 'GEOFI',
-    descricao: 'Responsável pelo acompanhamento e gerenciamento de Outorgas e Fiscalizações',
-    indicadores: ['Outorgas Atendidas', 'Outorgas Faturadas', 'Usuários Fiscalizados'],
-    cor: 'from-blue-500 to-blue-600'
-  }, {
-    id: 'gemed',
-    nome: 'Gerência de Medição',
-    sigla: 'GEMED',
-    descricao: 'Responsável pelo acompanhamento e gerenciamento de medições',
-    indicadores: ['Medidores Instalados', 'Conversão de Estimados em Medidos'],
-    cor: 'from-green-500 to-green-600'
-  }, {
-    id: 'gereu',
-    nome: 'Gerência de Relacionamento com o Usuário',
-    sigla: 'GEREU',
-    descricao: 'Responsável pela gestão do relacionamento e faturamento com o usuário',
-    indicadores: ['Usuários Regularizados', 'Redução da Inadimplência', 'Crescimento de Faturamento'],
-    cor: 'from-purple-500 to-purple-600'
-  }];
-  const regularizationData = [{
-    gerencia: 'GRALTIAGUARIBE',
-    meta: 4,
-    regularizado: 2,
-    percent: 50.0
-  }, {
-    gerencia: 'GRBANABUIU',
-    meta: 10,
-    regularizado: 0,
-    percent: 0.0
-  }, {
-    gerencia: 'GRCARAU',
-    meta: 12,
-    regularizado: 5,
-    percent: 41.67
-  }, {
-    gerencia: 'GRCRATEUS',
-    meta: 16,
-    regularizado: 3,
-    percent: 18.75
-  }, {
-    gerencia: 'GRCURU',
-    meta: 13,
-    regularizado: 3,
-    percent: 23.08
-  }];
+
+  const gerenciasData = [
+    {
+      id: 'geofi',
+      nome: 'Gerência de Outorga e Fiscalização',
+      sigla: 'GEOFI',
+      descricao: 'Responsável pelo acompanhamento e gerenciamento de Outorgas e Fiscalizações',
+      indicadores: ['Outorgas Atendidas', 'Outorgas Faturadas', 'Usuários Fiscalizados'],
+      cor: 'from-blue-500 to-blue-600'
+    },
+    {
+      id: 'gemed',
+      nome: 'Gerência de Medição',
+      sigla: 'GEMED',
+      descricao: 'Responsável pelo acompanhamento e gerenciamento de medições',
+      indicadores: ['Medidores Instalados', 'Conversão de Estimados em Medidos'],
+      cor: 'from-green-500 to-green-600'
+    },
+    {
+      id: 'gereu',
+      nome: 'Gerência de Relacionamento com o Usuário',
+      sigla: 'GEREU',
+      descricao: 'Responsável pela gestão do relacionamento e faturamento com o usuário',
+      indicadores: ['Usuários Regularizados', 'Redução da Inadimplência', 'Crescimento de Faturamento'],
+      cor: 'from-purple-500 to-purple-600'
+    }
+  ];
+
+  const regularizationData = [
+    {
+      gerencia: 'GRALTIAGUARIBE',
+      meta: 4,
+      regularizado: 2,
+      percent: 50.0
+    },
+    {
+      gerencia: 'GRBANABUIU',
+      meta: 10,
+      regularizado: 0,
+      percent: 0.0
+    },
+    {
+      gerencia: 'GRCARAU',
+      meta: 12,
+      regularizado: 5,
+      percent: 41.67
+    },
+    {
+      gerencia: 'GRCRATEUS',
+      meta: 16,
+      regularizado: 3,
+      percent: 18.75
+    },
+    {
+      gerencia: 'GRCURU',
+      meta: 13,
+      regularizado: 3,
+      percent: 23.08
+    }
+  ];
+
   const pieColors = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'];
+
   const handleVerPainel = (gerenciaId: string) => {
     setSelectedGerencia(gerenciaId);
     console.log('Abrir painel da gerência:', gerenciaId);
   };
+
   if (selectedGerencia) {
-    // Mostra o painel específico da gerência
     const gerencia = gerenciasData.find(g => g.id === selectedGerencia);
-    return <div className="space-y-6">
+    return (
+      <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <button onClick={() => setSelectedGerencia(null)} className="text-blue-600 hover:text-blue-800 mb-2 flex items-center gap-2">
@@ -133,7 +149,8 @@ const IndicadoresContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {regularizationData.map((item, index) => <tr key={index} className="border-b hover:bg-gray-50">
+                {regularizationData.map((item, index) => (
+                  <tr key={index} className="border-b hover:bg-gray-50">
                     <td className="p-3 font-medium">{item.gerencia}</td>
                     <td className="p-3 text-center">{item.meta}</td>
                     <td className="p-3 text-center">{item.regularizado}</td>
@@ -155,22 +172,26 @@ const IndicadoresContent = () => {
                       {item.gerencia === 'GRBANABUIU' ? '19' : '0'}
                     </td>
                     <td className="p-3 text-center">0</td>
-                  </tr>)}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </Card>
-      </div>;
+      </div>
+    );
   }
-  return <div className="space-y-6">
+
+  return (
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800">Painel de Indicadores por Gerência</h1>
-        
       </div>
 
       {/* Cards das Gerências */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {gerenciasData.map(gerencia => <Card key={gerencia.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+        {gerenciasData.map(gerencia => (
+          <Card key={gerencia.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full">
             <div className={`p-4 bg-gradient-to-r ${gerencia.cor} text-white`}>
               <div className="flex items-center gap-3">
                 <Building2 className="w-8 h-8" />
@@ -181,29 +202,34 @@ const IndicadoresContent = () => {
               </div>
             </div>
             
-            <div className="p-4">
+            <div className="p-4 flex flex-col flex-1">
               <p className="text-gray-600 text-sm mb-4">{gerencia.descricao}</p>
               
-              <div className="mb-4">
+              <div className="mb-4 flex-1">
                 <h4 className="font-semibold text-gray-800 mb-2">Indicadores Acompanhados:</h4>
                 <ul className="space-y-1">
-                  {gerencia.indicadores.map((indicador, index) => <li key={index} className="flex items-center text-sm text-gray-600">
+                  {gerencia.indicadores.map((indicador, index) => (
+                    <li key={index} className="flex items-center text-sm text-gray-600">
                       <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
                       {indicador}
-                    </li>)}
+                    </li>
+                  ))}
                 </ul>
               </div>
               
-              <button onClick={() => handleVerPainel(gerencia.id)} className={`w-full bg-gradient-to-r ${gerencia.cor} text-white py-2 px-4 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2`}>
+              <button 
+                onClick={() => handleVerPainel(gerencia.id)} 
+                className={`w-full bg-gradient-to-r ${gerencia.cor} text-white py-2 px-4 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 mt-auto`}
+              >
                 Ver Painel de Indicadores
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </Card>)}
+          </Card>
+        ))}
       </div>
-
-      {/* Resumo Geral */}
-      
-    </div>;
+    </div>
+  );
 };
+
 export default IndicadoresContent;
