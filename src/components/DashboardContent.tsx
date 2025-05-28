@@ -135,7 +135,7 @@ const DashboardContent = () => {
             )}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={monthlyData} onClick={handleBarClick}>
+            <BarChart data={monthlyData} onClick={handleBarClick} barCategoryGap="20%">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis 
                 dataKey="month" 
@@ -148,13 +148,15 @@ const DashboardContent = () => {
                 dataKey="faturadoAnterior" 
                 fill="#93c5fd" 
                 name="Ano Anterior"
-                barSize={40}
+                barSize={30}
+                radius={[2, 2, 0, 0]}
               />
               <Bar 
                 dataKey="faturadoAtual" 
                 fill="#22c55e" 
                 name="Ano Atual"
-                barSize={20}
+                barSize={15}
+                radius={[2, 2, 0, 0]}
               />
               {/* Linhas de separação dos trimestres */}
               <ReferenceLine x="Mar" stroke="#e5e7eb" strokeDasharray="2 2" />
