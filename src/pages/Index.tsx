@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from '@/components/Sidebar';
 import DashboardContent from '@/components/DashboardContent';
 import IndicadoresContent from '@/components/IndicadoresContent';
@@ -26,23 +27,6 @@ const Index = () => {
     }
   };
 
-  const getPanelDescription = () => {
-    switch (activePanel) {
-      case 'dashboard':
-        return 'Dashboard - Indicadores';
-      case 'indicadores':
-        return 'Painel de Indicadores Financeiros';
-      case 'regularizacao':
-        return 'Painéis de controle e monitoramento de processos de regularização de usuários';
-      case 'analises':
-        return 'Análises avançadas com modelos estatísticos e probabilísticos de previsões';
-      case 'relatorios':
-        return 'Relatórios detalhados e exportação de dados em diversos formatos';
-      default:
-        return 'Dashboard - Indicadores';
-    }
-  };
-
   const renderContent = () => {
     switch (activePanel) {
       case 'dashboard':
@@ -64,7 +48,7 @@ const Index = () => {
     <SidebarProvider defaultOpen={true}>
       <div className="min-h-screen flex w-full bg-white">
         <AppSidebar activePanel={activePanel} setActivePanel={setActivePanel} />
-        <SidebarInset className="flex-1 w-full">
+        <div className="flex-1 w-full ml-64">
           <div className="flex flex-col h-screen">
             <PanelHeader title={getPanelTitle()} />
             
@@ -72,7 +56,7 @@ const Index = () => {
               {renderContent()}
             </main>
           </div>
-        </SidebarInset>
+        </div>
       </div>
     </SidebarProvider>
   );
