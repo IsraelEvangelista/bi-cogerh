@@ -1,13 +1,10 @@
-
 import React from 'react';
 import { LayoutDashboard, BarChart, Settings, Folder, LayoutList } from 'lucide-react';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-
 interface AppSidebarProps {
   activePanel: string;
   setActivePanel: (panel: string) => void;
 }
-
 const menuItems = [{
   title: "Dashboard",
   icon: LayoutDashboard,
@@ -29,13 +26,11 @@ const menuItems = [{
   icon: Folder,
   id: "relatorios"
 }];
-
 export function AppSidebar({
   activePanel,
   setActivePanel
 }: AppSidebarProps) {
-  return (
-    <Sidebar className="bg-blue-900 border-r-0 fixed z-50 w-64">
+  return <Sidebar className="bg-blue-900 border-r-0 fixed z-50 w-64">
       <SidebarHeader className="p-4 border-b border-blue-800 bg-blue-900">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
@@ -44,7 +39,7 @@ export function AppSidebar({
             </div>
           </div>
           <div className="text-white">
-            <div className="text-sm font-semibold">BI - COGERH</div>
+            <div className="text-sm font-semibold">COGERH</div>
             <div className="text-xs opacity-80">Companhia de Gestão dos Recursos Hídricos</div>
           </div>
         </div>
@@ -54,18 +49,12 @@ export function AppSidebar({
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map(item => (
-                <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton 
-                    isActive={activePanel === item.id} 
-                    onClick={() => setActivePanel(item.id)} 
-                    className="text-white hover:bg-blue-800 data-[active=true]:bg-blue-700 data-[active=true]:text-white h-12 transition-colors justify-start"
-                  >
+              {menuItems.map(item => <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton isActive={activePanel === item.id} onClick={() => setActivePanel(item.id)} className="text-white hover:bg-blue-800 data-[active=true]:bg-blue-700 data-[active=true]:text-white h-12 transition-colors justify-start">
                     <item.icon className="w-5 h-5" />
                     <span className="ml-3">{item.title}</span>
                   </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+                </SidebarMenuItem>)}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -76,6 +65,5 @@ export function AppSidebar({
           GEREU - v1.0
         </div>
       </SidebarFooter>
-    </Sidebar>
-  );
+    </Sidebar>;
 }
